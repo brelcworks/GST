@@ -1,0 +1,91 @@
+﻿@model IEnumerable<GST.Models.STC>
+@{
+    ViewBag.Title = "STOCK LIST";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var wd = $(window).width() - 50;
+            var ht = $(window).height() - 190;
+            $('#grid').jqGrid({
+                url: '/STC/List_Pr/',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames: ['RID', 'HSN No', 'Part Name', 'Mrp', 'TAX RATE', 'QTY', 'TOTAL', 'UNIT'],
+                colModel: [
+                    { key: true, hidden: true, name: 'RID', index: 'RID', editable: true },
+                    { key: false, name: 'HSN_NO', index: 'PART_NO', editable: true },
+                    { key: false, name: 'PARTI', index: 'PARTI', editable: true },
+                    { key: false, name: 'MRP', index: 'MRP', editable: true },
+                    { key: false, name: 'TAX', index: 'GROP', editable: true },
+                    { key: false, name: 'QTY', index: 'CATE', editable: true },
+                    { key: false, name: 'TOTAL', index: 'TRATE', editable: true },
+                    { key: false, name: 'UNIT', index: 'UNIT', editable: true }
+                ],
+                toppager: true,
+                pager: jQuery('#pager'),
+                rowNum: 100000000,
+                rowList: [10, 20, 30, 100000000],
+                loadComplete: function () {
+                    $("option[value=100000000]").text('All');
+                },
+                height: ht,
+                viewrecords: true,
+                caption: 'STOCK LIST',
+                emptyrecords: 'BLANK',
+                loadonce: true,
+                shrinkToFit: true,
+                width: wd,
+                jsonReader: {
+                    root: 'rows',
+                    page: 'page',
+                    total: 'total',
+                    records: 'records',
+                    repeatitems: false,
+                    id: '0'
+                },
+            }).navGrid('#pager', { edit: true, add: true, del: true, refresh: true, search: true, view: true, cloneToTop: true },
+   {
+       zIndex: 100,
+       url: '/STC/edt',
+       closeOnEscape: true,
+       closeAfterEdit: true,
+       recreateForm: true,
+       afterComplete: function (response) {
+           if (response.responseText) {
+               alert(response.responseText);
+           }
+       }
+   },
+   {
+       zIndex: 100,
+       url: '/STC/crt',
+       closeOnEscape: true,
+       closeAfterAdd: true,
+       afterComplete: function (response) {
+           if (response.responseText)
+           {
+               alert(response.responseText);
+           }
+       }
+   },
+   {
+       zIndex: 100,
+       url: '/STC/dlt',
+       closeOnEscape: true,
+       closeAfterDelete: true,
+       recreateForm: true,
+       msg: "Are You Want to Delete This Record",
+       afterComplete: function (response) {
+           if (response.responseText) {
+               alert(response.responseText);
+           }
+       }
+   });
+        });
+    </script>
+}
+<table id="grid"></table>
+<div id="pager"></div>
+
