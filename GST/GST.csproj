@@ -1109,9 +1109,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\login.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
-    <Content Include="Views\STC\Create.cshtml" />
     <Content Include="Views\STC\LIST.cshtml" />
     <Content Include="Views\PURC\Create.cshtml" />
+    <Content Include="Views\STC\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
