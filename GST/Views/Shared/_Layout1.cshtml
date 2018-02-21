@@ -8,8 +8,10 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/themes/BLITZER/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/ui.multiselect.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui-1.10.0.js"></script>
+    <script src="~/Scripts/ui.multiselect.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/i18n/grid.locale-en.js"></script>
     <script src="~/Scripts/jquery.jqGrid.js"></script>
@@ -44,8 +46,6 @@
     <script src="~/jqwidgets/jqxnotification.js"></script>
     <script src="~/jqwidgets/jqxtooltip.js"></script>
     @RenderSection("scripts", required: false)
-</head>
-<body>
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color :indigo">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -96,12 +96,12 @@
             </div>
         </div>
     </nav>
-
+</head>
+<body>
     <div>
         <div style="width: 98%; margin-right: 1%; margin-left: 1%" class="table table-responsive">
-            <hr />
-            <br/>
             <br />
+            <hr />
             @RenderBody()
             <hr />
         </div>

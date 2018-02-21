@@ -154,5 +154,55 @@ namespace GST.Controllers
                 return View(bill);
             }
         }
+
+        [Authorize]
+        public JsonResult GetParti(string term)
+        {
+            List<string> itms;
+            itms = dc.STC.Where(x => x.PARTI.StartsWith(term))
+                .Select(y => y.PARTI).ToList();
+            return Json(itms, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public JsonResult gdata2(string aData)
+        {
+            List<STC> STLIST = new List<STC>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.STC.Where(A => A.PARTI.Equals(aData)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult UPSTC(STC TBL)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    dc.Entry(TBL).State = EntityState.Modified;
+                    dc.SaveChanges();
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex) { message = ex.ToString(); }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(TBL);
+            }
+        }
     }
 }
