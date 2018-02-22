@@ -41,7 +41,6 @@
                 </td>
             </tr>
         </table>
-        <br/>
         <table class="table table-hover table-bordered table-responsive ui-front" style="font-size:x-small;">
             <tr>
                 <td>
@@ -147,8 +146,7 @@
         <input id="PRINTBILL" value="Print" type="button" style='margin-left: 5px;' />
         <input id='searchField' type='text' style='margin-left:5px' />
     </div>
-    <div id="popupWindow" class="ADD_ITEM">
-        <div>ADD NEW ITEM</div>
+    <div id="popupWindow" class="ADD_ITEM" title="ADD NEW ITEM">
         <div style="overflow: hidden;">
             <table class="table table-hover table-bordered ui-front">
                 <tr>
@@ -196,6 +194,8 @@
                 </tr>
                 <tr>
                     <td colspan="6">
+                        <input type="hidden" id="BILLID-TXT" />
+                        <input type="hidden" id="BID-TXT" />
                         <input type="hidden" id="qinc" />
                         <input type="hidden" id="STRID1" />
                         <input type="hidden" id="STRID" />
@@ -220,6 +220,8 @@
                         <input type="hidden" id="STAEDT" />
                         <input type="hidden" id="STUSER1" />
                         <input type="hidden" id="txtSTOT" />
+                        <input type="hidden" id="txtTOT2" />
+                        <input type="hidden" id="OSTC" />
                     </td>
                 </tr>
                 <tr>
@@ -228,90 +230,7 @@
             </table>
         </div>
     </div>
-    <div id="popupWindow1">
-        <div>UPDATE ITEM</div>
-        <div style="overflow: hidden;">
-            <table class="table table-hover table-bordered ui-front">
-                <tr>
-                    <td><label for="txtBNO11">BILL NO:</label></td>
-                    <td align="left" colspan="3"><input id="txtBNO11" type="text" class="form-control input-xs" readonly /></td>
-                </tr>
-                <tr>
-                    <td><label for="txtPTNO1">PART NO:</label></td>
-                    <td align="left"><input id="txtPTNO1" type="text" class="form-control input-xs" readonly /></td>
-                    <td><label for="txtQTY1">QUANTITY:</label></td>
-                    <td align="left"><input id="txtQTY1" type="text" class="form-control input-xs" /></td>
-                </tr>
-                <tr>
-                    <td><label for="txtPTNAME1">PART NAME:</label></td>
-                    <td align="left"><input id="txtPTNAME1" type="text" class="form-control input-xs" readonly /></td>
-                    <td><label for="txtTVAL11">TAX VALUE:</label></td>
-                    <td align="left"><input id="txtTVAL11" type="text" class="form-control input-xs" readonly /></td>
-                </tr>
-                <tr>
-                    <td><label for="txtMRP1">MRP:</label></td>
-                    <td align="left"><input id="txtMRP1" type="text" class="form-control input-xs" /></td>
-                    <td><label for="txtTOT1">ITEM TOTAL:</label></td>
-                    <td align="left"><input id="txtTOT1" type="text" class="form-control input-xs" /></td>
-                </tr>
-                <tr>
-                    <td><label for="txtSPRICE1">SELL PRICE:</label></td>
-                    <td align="left"><input id="txtSPRICE1" type="text" class="form-control input-xs" /></td>
-                    <td><label for="txtSTC1">IN STOCK:</label></td>
-                    <td align="left"><input id="txtSTC1" type="text" class="form-control input-xs" readonly /></td>
-                </tr>
-                <tr>
-                    <td><label for="txtTRATE1">TAX RATE:</label></td>
-                    <td align="left"><input id="txtTRATE1" type="text" class="form-control input-xs" /></td>
-                    <td><label for="txtUNIT1">UNIT:</label></td>
-                    <td align="left"><input id="txtUNIT1" type="text" class="form-control input-xs" /></td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <input type="hidden" id="BILLID-TXT" />
-                        <input type="hidden" id="BID-TXT" />
-                        <input type="hidden" id="qinc1" />
-                        <input type="hidden" id="STRID11" />
-                        <input type="hidden" id="STRID1" />
-                        <input type="hidden" id="STTYPE1" />
-                        <input type="hidden" id="STPART_NO1" />
-                        <input type="hidden" id="STPARTI1" />
-                        <input type="hidden" id="STMRP1" />
-                        <input type="hidden" id="STQTY1" />
-                        <input type="hidden" id="STTOTAL1" />
-                        <input type="hidden" id="STRACKNO1" />
-                        <input type="hidden" id="STTAX1" />
-                        <input type="hidden" id="STTVAL1" />
-                        <input type="hidden" id="STSTOTAL1" />
-                        <input type="hidden" id="STPPRICE1" />
-                        <input type="hidden" id="STUNIT1" />
-                        <input type="hidden" id="STSPRICE1" />
-                        <input type="hidden" id="STSSTA1" />
-                        <input type="hidden" id="STEOR1" />
-                        <input type="hidden" id="STDPCODE1" />
-                        <input type="hidden" id="STLMODI1" />
-                        <input type="hidden" id="STGROP1" />
-                        <input type="hidden" id="STAEDT1" />
-                        <input type="hidden" id="STUSER11" />
-                        <input type="hidden" id="txtSTOT1" />
-                        <input type="hidden" id="txtTOT2" />
-                        <input type="hidden" id="OSTC" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save1" value="Save" /><input id="Cancel1" style="margin-right: 5px;" type="button" value="Cancel" /><input id="btnDEL" style="margin-right: 5px;" type="button" value="Delete" /><input id="btnDEL1" type="button" value="Delete" style="margin-right: 5px;" /><input id="adnstc1" type="button" value="Add New Stock" /></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div id="VIEWBILL">
-        <div>INVOICE LIST</div>
-        <div style="overflow: hidden;font-size:x-small">
-            <div id="grid"></div>
-            <input id="Cancel2" type="button" value="Cancel" />
-        </div>
-    </div>
+    
     <div id="CHALLAN">
         <div>PRINT</div>
         <div style="overflow: hidden;">
@@ -345,230 +264,29 @@
             </div>
         </div>>
     </div>
-    <div id="ADD_ITM_DIV">
-        <div>ADD NEW STOCK</div>
-        <div style="overflow: hidden;">
-            <table class="table table-bordered table-hover table-responsive ui-front adn" style="font-size : smaller">
-                <tr>
-                    <td>
-                        <label for="RID">RECORD NO</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adRID" name="RID" placeholder="RECORD NO" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="STOTAL">SELL PRICE TOTAL</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adSTOT" name="STOTAL" placeholder="SELL PRICE TOTAL" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="PART_NO">PART NO</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adPtno" name="PART_NO" placeholder="PART NO" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="TVAL">TAX VALUE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adTVAL" name="TVAL" placeholder="TAX VALUE" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="PARTI">PART NAME</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adParti" name="PARTI" placeholder="PART NAME" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="TYPE">ITEM TYPE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adTYPE" name="TYPE" placeholder="ITEM TYPE" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="MRP">MRP</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adMRP" name="MRP" placeholder="MRP" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="UNIT">UNIT</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adUNIT" name="UNIT" placeholder="UNIT" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="TAX">TAX RATE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adTAX" name="TAX" placeholder="TAX RATE" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="RACKNO">RACK NO</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adRCNO" name="RACKNO" placeholder="RACK NO" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="SPRICE">SELL PRICE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adSPRICE" name="SPRICE" placeholder="SELL PRICE" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="EOR">EOR</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adEOR" name="EOR" placeholder="ITEM E.O.R" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="PPRICE">PURCAHSE PRICE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adPPRICE" name="PPRICE" placeholder="PURCHASE PRICE" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="grop">ITEM GROUP</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adGROP" name="grop" placeholder="ITEM GROUP" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="QTY">QTY</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adQTY" name="QTY" placeholder="QUANTITY" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="DPCODE">DEALER CODE</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adDPCODE" name="DPCODE" placeholder="DEALER CODE" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="TOTAL">ITEM TOTAL</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adTOTAL" name="TOTAL" placeholder="ITEM TOTAL" type="text" value="" />
-                    </td>
-                    <td>
-                        <label for="USER1">USER NAME</label>
-                    </td>
-                    <td>
-                        <input class="form-control input-xs" id="adUSER" name="USER1" placeholder="USER NAME" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <input id="cls3" type="button" class="btn btn-warning btn-xs" value="Cancel" />
-                        <input id="sv1" type="button" class="btn btn-primary btn-xs ui-icon-plus" value="Save" />
-                        <input id="adnstc2" type="button" value="Add New Item" class="btn btn-warning btn-xs" />
-                        <input id="adLMODI" name="lmodi" type="hidden" value="" />
-                        <input id="adSSTA" name="SSTA" type="hidden" value="" />
-                        <input id="adAEDT" name="AEDT" type="hidden" value="" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div id="ADD_ITM_DIV_PR">
-        <div>ADD NEW STOCK ITEM</div>
-        <div style="overflow: hidden;">
-            <table class="table table-bordered table-hover table-responsive adn1" style="font-size : smaller">
-                <tr>
-                    <td><label for="PRPART_NO">PART NO</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRPART_NO" name="PART_NO" type="text" value="" />
-                    </td>
-                    <td><label for="PRCATE">ITEM TYPE</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRCATE" name="CATE" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="PRPARTI">PART NAME</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRPARTI" name="PARTI" type="text" value="" />
-                    </td>
-                    <td><label for="PRGROP">ITEM GROUP</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRGROP" name="GROP" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="PRMRP">MRP</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRMRP" name="MRP" type="text" value="" />
-                    </td>
-                    <td><label for="PRunit">UNIT</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRunit" name="unit" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="PRTRATE">TAX RATE</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRTRATE" name="TRATE" type="text" value="" />
-                    </td>
-                    <td><label for="PRDPCODE">DEALER CODE</label></td>
-                    <td>
-                        <input class="text-box single-line form-control" id="PRDPCODE" name="DPCODE" type="text" value="" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <input id="cls4" type="button" class="btn btn-warning btn-xs" value="Cancel" />
-                        <input id="sv2" type="button" class="btn btn-primary btn-xs ui-icon-plus" value="Save" />
-                        <input id="PRlmodi" name="lmodi" type="hidden" value="" />
-                        <input id="PRrid1" name="rid1" type="hidden" value="" />
-                        <input id="PRAEDT" name="AEDT" type="hidden" value="" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    
     <div id="messageNotification">
         <div id="msg"></div>
     </div>
 
-<div id="C-FORM">
-    <div>BILL BASIC</div>
+<div id="C-FORM" title="BILL BASIC">
     <div style="overflow: hidden;">
         <table class="table table-bordered table-hover table-responsive adn1" style="font-size : smaller">
             <tr>
-                <td class="label-success">PO NO:</td>
-                <td><input id="PNO" name="PNO" type="text" value="" class="form-control input-xs" /></td>
+                <td nowrap><label for="GSTIN">GSTIN:</label></td>
+                <td colspan="3"><input id="GSTIN" name="GSTIN" type="text" value="" class="form-control input-xs" /></td>
             </tr>
             <tr>
-                <td class="label-danger">PO DATE:</td>
-                <td><input id="PDATE" name="PDATE" type="Date" value="" class="form-control input-xs" /></td>
+                <td nowrap><label for="STATE">STATE:</label></td>
+                <td><input id="STATE" name="STATE" type="text" value="" class="form-control input-xs" /></td>
+                <td nowrap><label for="STATECO">STATE CODE:</label></td>
+                <td><input id="STATECO" name="STATECO" type="text" value="" class="form-control input-xs" /></td>
             </tr>
             <tr>
-                <td class="label-primary">QUOTATION NO:</td>
-                <td><input id="QNO" name="QNO" type="text" value="" class="form-control input-xs" /></td>
+                <td nowrap><label for="ADDRESS">ADDRESS:</label></td>
+                <td colspan="3"><input id="ADDRESS" name="ADDRESS" type="text" value="" class="form-control input-xs" /></td>
             </tr>
-            <tr>
-                <td class="label-warning">QUOTATION DATE:</td>
-                <td><input id="QDATE" name="QDATE" type="Date" value="" class="form-control input-xs" /></td>
-            </tr>
-            <tr><td colspan=2><input id="SC-FORM" type="button" class="btn btn-info btn-xs form-control" value="Save" /></td></tr>
+            <tr><td colspan=4><input id="SC-FORM" type="button" class="btn btn-info btn-xs form-control" value="Save" /></td></tr>
         </table>
     </div>
 </div>
@@ -595,88 +313,19 @@
                     $('#txtTOTAL').val("0");
                     $('#searchField').focus();
                     $("#searchField").jqxInput({ placeHolder: "SEARCH", height: 20, width: 200, minLength: 1, theme: 'ui-start' });
-                    $("#popupWindow1").jqxWindow({
-                        width: '100%', height: '50%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel1"), modalOpacity: 0.01
-                    });
-
-                    $("#VIEWBILL").jqxWindow({
-                        minHeight: '95%', minWidth: '95%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel2"), modalOpacity: 0.01
-                    });
-                    $("#ADD_ITM_DIV").jqxWindow({
-                        maxHeight: '70%', minWidth: '95%', theme: 'ui-start', isModal: true, autoOpen: false, cancelButton: $("#cls3"), modalOpacity: 0.01
-                    });
-                    $("#ADD_ITM_DIV_PR").jqxWindow({
-                        maxHeight: '70%', minWidth: '80%', theme: 'orange', isModal: true, autoOpen: false, cancelButton: $("#cls4"), modalOpacity: 0.01
-                    });
-
+                    
                     $("#CHALLAN").jqxWindow({
                         maxHeight: '50%', minWidth: '50%', theme: 'orange', isModal: true, autoOpen: false, cancelButton: $("#cls4"), modalOpacity: 0.01
-                    });
-
-                    $("#C-FORM").jqxWindow({
-                        maxHeight: '50%', minWidth: '50%', theme: 'orange', isModal: true, autoOpen: false, cancelButton: $("#cls4"), modalOpacity: 0.01
-                    });
-
-                    $("#C-FORM").on('open', function () {
-                        $("#PNO").jqxInput('selectAll');
-                        $("#PNO").focus();
-                    });
-
-                    $("#C-FORM").on('close', function (e) {
-                        $('#REFBILL').prop('disabled', true);
-                        $("#txtBNO").focus();
-                    });
-
-                    $("#ADD_ITM_DIV").on('open', function () {
-                        $("#adRID").jqxInput('selectAll');
-                        $("#adPtno").focus();
-                    });
-                    $("#ADD_ITM_DIV_PR").on('open', function () {
-                        $("#PRPART_NO").jqxInput('selectAll');
-                        $("#PRPART_NO").focus();
                     });
 
                     $("#CHALLAN").on('open', function () {
                         $("#txtBNOH").jqxInput('selectAll');
                         $("#txtBNOH").focus();
                     });
-
-                    $("#popupWindow1").on('open', function () {
-                        $("#txtPTNO1").jqxInput('selectAll');
-                        $("#txtBNO11").val($("#txtBNO").val());
-                    });
-
-                    $("#popupWindow1").on('close', function (e) {
-                        if (!isdel) {
-                            $("#btnDEL1").click();
-                            alert("DataBase Updated!");
-                        }
-                        else if (!isupd) {
-                            canupd();
-                            alert("DataBase Updated!");
-                        }
-                    });
-                    $("#popupWindow1").on('cancel', function (e) {
-                        if (!isdel) {
-                            $("#btnDEL1").click();
-                            alert("DataBase Updated!");
-                        }
-                        else if (!isupd) {
-                            canupd();
-                            alert("DataBase Updated!");
-                        }
-                    });
-
+ 
                     $("#Cancel").jqxButton({ template: "warning" });
                     $("#Save").jqxButton({ template: "success" });
-                    $("#adnstc1").jqxButton({ template: "primary" });
-                    $("#adnstc2").jqxButton({ template: "danger" });
-                    $("#Cancel1").jqxButton({ template: "warning" });
-                    $("#btnDEL").jqxButton({ template: "danger" });
-                    $("#btnDEL1").jqxButton({ template: "info" });
-                    $("#Save1").jqxButton({ template: "success" });
-                    $("#btnNBILL").jqxButton({ template: "primary" });
-                    $("#Cancel2").jqxButton({ template: "warning" });
+                    $("#btnNBILL").jqxButton({ template: "primary" });                
                     $('#REFBILL').jqxButton({ template: "success" });
                     $('#NBILL').jqxButton({ template: "success" });
                     $('#UPDBILL').jqxButton({ template: "warning" });
@@ -687,7 +336,7 @@
                         url: '/PURC/BILL/',
                         datatype: 'json',
                         mtype: 'GET',
-                        postData: { BNO: function () { return '3'; } },
+                        postData: { BNO: function () { return '0'; } },
                         colNames: ['BILLID', 'BID', 'HSN NO', 'PART NAME', 'MRP', 'SELL PRICE', 'QTY', 'UNIT', 'TAX VALUE', 'AMOUNT', 'ACTION'],
                         colModel: [
                             { key: true, hidden: true, name: 'BILLID', index: 'BILLID', editable: true, editrules: { edithidden: true } },
@@ -774,9 +423,30 @@
                         hide: 'explode'
                     });
 
+                    $("#C-FORM").dialog({
+                        modal: true,
+                        autoOpen: false,
+                        width: '50%',
+                        position: {
+                            my: "center center",
+                            at: "center center"
+                        },
+                        show: "slide",
+                        hide: 'explode'
+                    });
+
                     $('#txtQTY').keyup(function (e) {
-                        $('#STQTY').val(parseFloat($('#qinc').val()) + parseFloat($('#txtQTY').val()))
-                        $('#STTOTAL').val((parseFloat($('#STQTY').val()) * parseFloat($('#txtMRP').val())).toFixed(2));
+                        if (EMODE == false)
+                        {
+                            var stt = parseFloat($('#OSTC').val()) - parseFloat($('#txtQTY').val());
+                            $('#STQTY').val(parseFloat($('#qinc').val()) - stt)
+                            $('#STTOTAL').val((parseFloat($('#STQTY').val()) * parseFloat($('#txtMRP').val())).toFixed(2));
+                        }
+                        else
+                        {
+                            $('#STQTY').val(parseFloat($('#qinc').val()) + parseFloat($('#txtQTY').val()))
+                            $('#STTOTAL').val((parseFloat($('#STQTY').val()) * parseFloat($('#txtMRP').val())).toFixed(2));
+                        }
                         e.preventDefault();
                     });
 
@@ -839,147 +509,14 @@
                 });
 
                 $('#Save').click(function (e) {
-                    var dataObject = {
-                        BILL_NO: $("#txtBNO1").val(),
-                        HSN_NO: $("#txtPTNO").val(),
-                        PARTI: $("#txtPTNAME").val(),
-                        MRP: $("#txtMRP").val(),
-                        PQTY: $("#txtQTY").val(),
-                        SPRICE: $("#txtSPRICE").val(),
-                        TOTAL: $("#txtTOT").val(),
-                        IGST: $("#txtIGST").val(),
-                        CGST: $("#txtCGST").val(),
-                        SGST: $("#txtSGST").val(),
-                        IGSTR: $("#txtTRATE").val(),
-                        CGSTR: $("#txtCGSTR").val(),
-                        SGSTR: $("#txtSGSTR").val(),
-                        UNIT: $("#txtUNIT").val(),
-                        BDATE: $("#txtBDATE").val(),
-                        MODE: $("#txtMODE").val(),
-                        BID: new Date($.now()),
-                        CUST: $('#txtCUST').val(),
-                        STOT: $('#txtSTOT').val(),
-                        TVAL: $('#txtTVAL1').val(),
-                        USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
-                    };
-                    var dataObject1 = {
-                        HSN_NO: $("#txtPTNO").val(),
-                        PARTI: $("#txtPTNAME").val(),
-                        MRP: $("#txtMRP").val(),
-                        QTY: $("#txtQTY").val(),
-                        SPRICE: $("#txtSPRICE").val(),
-                        TOTAL: $("#txtTOT").val(),
-                        TAX:$('#txtTRATE').val(),
-                        UNIT: $("#txtUNIT").val(),
-                        RID: new Date($.now()),
-                        PPRICE: $('#txtSPRICE').val(),
-                        TVAL: $('#txtTVAL1').val(),
-                        USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
-                    };
-                    var dataObject2 = {
-                        RID1: $("#STRID1").val(),
-                        HSN_NO: $("#txtPTNO").val(),
-                        PARTI: $("#txtPTNAME").val(),
-                        MRP: $("#txtMRP").val(),
-                        QTY: $("#STQTY").val(),
-                        SPRICE: $("#txtSPRICE").val(),
-                        TOTAL: $("#STTOTAL").val(),
-                        TAX: $('#txtTRATE').val(),
-                        UNIT: $("#txtUNIT").val(),
-                        RID: new Date($.now()),
-                        PPRICE: $('#txtSPRICE').val(),
-                        TVAL: $('#STTVAL').val(),
-                        USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
-                    };
-                    $.ajax({
-                        url: "@Url.Action("Save","PURC")",
-                        type: "POST",
-                        data: dataObject,
-                        dataType: "json",
-                        success: function (data) {
-                        if (data.toString() != "Successfully Saved!") {
-                            alert(data.toString());
-                        }
-                        else {
-                            var nurl = '/PURC/BILL/';
-                            jQuery('#mntbl').jqGrid('clearGridData');
-                            jQuery('#mntbl').jqGrid('setGridParam', { url: nurl, datatype: 'json', postData: { BNO: function () { return $("#txtBNO").val(); } } }).trigger("reloadGrid");
-                            $("#IGST").val(parseFloat($("#IGST").val()) + parseFloat($("#txtIGST").val()));
-                            $("#CGST").val(parseFloat($("#CGST").val()) + parseFloat($("#txtCGST").val()));
-                            $("#SGST").val(parseFloat($("#SGST").val()) + parseFloat($("#txtSGST").val()));
-                            $("#txtGTOT").val(parseFloat($("#txtGTOT").val()) + parseFloat($("#txtSTOT").val()));
-                            $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val()))).toFixed(2));
-                            var TVAL = parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val());
-                            var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat(TVAL));
-                            $('#txtROUND').val(rnd.toFixed(2));
-                            var mde = $('#txtMODE').val();
-                            if (mde == "CREDIT") {
-                                $('#txtNTOT').val($('#txtBAMT').val());
-                                $('#txtTOTAL').val(Math.round(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val())).toFixed(2));
-                                $('#txtBAPAY').val($('#txtBAMT').val());
-                                $('#txtBST').val("UP");
-                                $('#txtMODE').val(mde);
-                                $('#txtCBILL').val("0.00");
-                            }
-                            else {
-                                $('#txtCBILL').val($('#txtBAMT').val());
-                                $('#txtMODE').val(mde);
-                                $('#txtNTOT').val("0.00");
-                                $('#txtBAPAY').val("0.00");
-                                $('#txtBST').val("FP");
-                            }
-                            $.ajax({
-                                type: "GET",
-                                url: "@Url.Action("DPL","PURC")",
-                                data: { aData: $("#txtPTNAME").val() },
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data == "0") {
-                                        $.ajax({
-                                            url: "@Url.Action("ADSTC", "PURC")",
-                                            type: "POST",
-                                            data: dataObject1,
-                                            dataType: "json",
-                                            success: function (data) {
-                                                if (data.toString() != "Successfully Saved!") {
-                                                    alert(data.toString());
-                                                }
-                                            },
-                                            error: function OnErrorCall(response) {
-                                                alert(response.status + " " + response.statusText);
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        $.ajax({
-                                            url: "@Url.Action("UPSTC", "PURC")",
-                                            type: "POST",
-                                            data: dataObject2,
-                                            dataType: "json",
-                                            success: function (data) {
-                                            if (data.toString() != "Successfully Saved!") {
-                                                alert(data.toString());
-                                            }
-                                        },
-                                        error: function OnErrorCall(response) {
-                                            alert(response.status + " " + response.statusText);
-                                        }
-                                    });
-                                    }
-                                },
-                                error: function OnErrorCall(response) {
-                                    alert(response.status + " " + response.statusText);
-                                }
-                            });
-                            $('.ADD_ITEM').find('input:text').val('');
-                            $("#popupWindow").dialog("close");
-                            }
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
-                    });
+                    if(EMODE==true)
+                    {
+                        ADDNMODE()
+                    }
+                    else if(EMODE==false)
+                    {
+                        ADDEMODE()
+                    }
                 });
                 $('#txtBNO').keypress(function (e) {
                     if (e.keyCode == 13) {
@@ -989,7 +526,7 @@
                 });
                 $('#txtCUST').keypress(function (e) {
                     if (e.keyCode == 13) {
-                        $('#txtADDRESS').focus();
+                        $("#C-FORM").dialog("open");
                         e.preventDefault();
                     }
                 });
@@ -1088,8 +625,355 @@
                             });
                             e.preventDefault();
                         }
-                 });
+                });
             });
+
+            function gtmntblid(id) {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("dtls", "PURC")",
+                    data: { id: id },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        $("#txtPTNO").val(val.HSN_NO)
+                        $("#txtPTNAME").val(val.PARTI)
+                        $("#txtMRP").val(val.MRP)
+                        $('#txtQTY').val(val.PQTY)
+                        $('#txtBNO1').val($('#txtBNO').val())
+                        $('#txtSPRICE').val(val.SPRICE)
+                        $('#txtTVAL1').val(val.TVAL)
+                        $('#txtTRATE').val(val.IGSTR)
+                        $('#txtTOT').val(val.TOTAL)
+                        $('#txtTOT2').val(val.TOTAL)
+                        $('#txtUNIT').val(val.UNIT)
+                        $('#txtSTOT').val(val.STOT)
+                        $('#BILLID-TXT').val(val.BILLID)
+                        $('#BID-TXT').val(val.BID)
+                        $('#OSTC').val(val.PQTY)
+                        $("#txtIGST").val(val.IGST)
+                        $("#txtCGST").val(val.CGST)
+                        $("#txtSGST").val(val.SGST)
+                        $("#txtCGSTR").val(val.CGSTR)
+                        $("#txtSGSTR").val(val.SGSTR)
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("sdtls", "PURC")",
+                            data: { id: $("#txtPTNAME").val() },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                $.each(data, function (i, val1) {
+                                    $("#STRID1").val(val1.RID1)
+                                    $('#txtSTC').val(val1.QTY)
+                                    $('#qinc').val(val1.QTY)
+                                });
+                            },
+                            error: function () {
+                                alert(response.status + " " + response.responseText);
+                            }
+                        });
+                    });
+                    $("#popupWindow").dialog("open");
+                    EMODE = false;
+                    $('#txtMRP').focus();
+                },
+                error: function () {
+                    alert(response.status + " " + response.responseText);
+                }
+            });
+            }
+
+            function ADDNMODE() {
+                var dataObject = {
+                    BILL_NO: $("#txtBNO1").val(),
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    PQTY: $("#txtQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#txtTOT").val(),
+                    IGST: $("#txtIGST").val(),
+                    CGST: $("#txtCGST").val(),
+                    SGST: $("#txtSGST").val(),
+                    IGSTR: $("#txtTRATE").val(),
+                    CGSTR: $("#txtCGSTR").val(),
+                    SGSTR: $("#txtSGSTR").val(),
+                    UNIT: $("#txtUNIT").val(),
+                    BDATE: $("#txtBDATE").val(),
+                    MODE: $("#txtMODE").val(),
+                    BID: new Date($.now()),
+                    CUST: $('#txtCUST').val(),
+                    STOT: $('#txtSTOT').val(),
+                    TVAL: $('#txtTVAL1').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                var dataObject1 = {
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    QTY: $("#txtQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#txtTOT").val(),
+                    TAX:$('#txtTRATE').val(),
+                    UNIT: $("#txtUNIT").val(),
+                    RID: new Date($.now()),
+                    PPRICE: $('#txtSPRICE').val(),
+                    TVAL: $('#txtTVAL1').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                var dataObject2 = {
+                    RID1: $("#STRID1").val(),
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    QTY: $("#STQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#STTOTAL").val(),
+                    TAX: $('#txtTRATE').val(),
+                    UNIT: $("#txtUNIT").val(),
+                    RID: new Date($.now()),
+                    PPRICE: $('#txtSPRICE').val(),
+                    TVAL: $('#STTVAL').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                $.ajax({
+                    url: "@Url.Action("Save","PURC")",
+                    type: "POST",
+                data: dataObject,
+                dataType: "json",
+                success: function (data) {
+                    if (data.toString() != "Successfully Saved!") {
+                        alert(data.toString());
+                    }
+                    else {
+                        var nurl = '/PURC/BILL/';
+                        jQuery('#mntbl').jqGrid('clearGridData');
+                        jQuery('#mntbl').jqGrid('setGridParam', { url: nurl, datatype: 'json', postData: { BNO: function () { return $("#txtBNO").val(); } } }).trigger("reloadGrid");
+                        $("#IGST").val(parseFloat($("#IGST").val()) + parseFloat($("#txtIGST").val()));
+                        $("#CGST").val(parseFloat($("#CGST").val()) + parseFloat($("#txtCGST").val()));
+                        $("#SGST").val(parseFloat($("#SGST").val()) + parseFloat($("#txtSGST").val()));
+                        $("#txtGTOT").val(parseFloat($("#txtGTOT").val()) + parseFloat($("#txtSTOT").val()));
+                        $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val()))).toFixed(2));
+                        var TVAL = parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val());
+                        var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat(TVAL));
+                        $('#txtROUND').val(rnd.toFixed(2));
+                        var mde = $('#txtMODE').val();
+                        if (mde == "CREDIT") {
+                            $('#txtNTOT').val($('#txtBAMT').val());
+                            $('#txtTOTAL').val(Math.round(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val())).toFixed(2));
+                            $('#txtBAPAY').val($('#txtBAMT').val());
+                            $('#txtBST').val("UP");
+                            $('#txtMODE').val(mde);
+                            $('#txtCBILL').val("0.00");
+                        }
+                        else {
+                            $('#txtCBILL').val($('#txtBAMT').val());
+                            $('#txtMODE').val(mde);
+                            $('#txtNTOT').val("0.00");
+                            $('#txtBAPAY').val("0.00");
+                            $('#txtBST').val("FP");
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("DPL","PURC")",
+                            data: { aData: $("#txtPTNAME").val() },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == "0") {
+                                $.ajax({
+                                    url: "@Url.Action("ADSTC", "PURC")",
+                                    type: "POST",
+                                data: dataObject1,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                    }
+                                },
+                                error: function OnErrorCall(response) {
+                                    alert(response.status + " " + response.statusText);
+                                }
+                            });
+                        }
+                    else {
+                                    $.ajax({
+                                        url: "@Url.Action("UPSTC", "PURC")",
+                            type: "POST",
+                        data: dataObject2,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.toString() != "Successfully Saved!") {
+                                alert(data.toString());
+                            }
+                        },
+                        error: function OnErrorCall(response) {
+                            alert(response.status + " " + response.statusText);
+                        }
+                    });
+                }
+            },
+            error: function OnErrorCall(response) {
+                alert(response.status + " " + response.statusText);
+            }
+            });
+            $('.ADD_ITEM').find('input:text').val('');
+            $("#popupWindow").dialog("close");
+            }
+            },
+            error: function OnErrorCall(response) {
+                alert(response.status + " " + response.statusText);
+            }
+            });
+            }
+
+            function ADDEMODE() {
+                var dataObject = {
+                    BILLID: $('#BILLID-TXT').val(),
+                    BILL_NO: $("#txtBNO1").val(),
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    PQTY: $("#txtQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#txtTOT").val(),
+                    IGST: $("#txtIGST").val(),
+                    CGST: $("#txtCGST").val(),
+                    SGST: $("#txtSGST").val(),
+                    IGSTR: $("#txtTRATE").val(),
+                    CGSTR: $("#txtCGSTR").val(),
+                    SGSTR: $("#txtSGSTR").val(),
+                    UNIT: $("#txtUNIT").val(),
+                    BDATE: $("#txtBDATE").val(),
+                    MODE: $("#txtMODE").val(),
+                    BID: new Date($.now()),
+                    CUST: $('#txtCUST').val(),
+                    STOT: $('#txtSTOT').val(),
+                    TVAL: $('#txtTVAL1').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                var dataObject1 = {
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    QTY: $("#txtQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#txtTOT").val(),
+                    TAX:$('#txtTRATE').val(),
+                    UNIT: $("#txtUNIT").val(),
+                    RID: new Date($.now()),
+                    PPRICE: $('#txtSPRICE').val(),
+                    TVAL: $('#txtTVAL1').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                var dataObject2 = {
+                    RID1: $("#STRID1").val(),
+                    HSN_NO: $("#txtPTNO").val(),
+                    PARTI: $("#txtPTNAME").val(),
+                    MRP: $("#txtMRP").val(),
+                    QTY: $("#STQTY").val(),
+                    SPRICE: $("#txtSPRICE").val(),
+                    TOTAL: $("#STTOTAL").val(),
+                    TAX: $('#txtTRATE').val(),
+                    UNIT: $("#txtUNIT").val(),
+                    RID: new Date($.now()),
+                    PPRICE: $('#txtSPRICE').val(),
+                    TVAL: $('#STTVAL').val(),
+                    USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                };
+                $.ajax({
+                    url: "@Url.Action("UPD","PURC")",
+                    type: "POST",
+                data: dataObject,
+                dataType: "json",
+                success: function (data) {
+                    if (data.toString() != "Successfully Saved!") {
+                        alert(data.toString());
+                    }
+                    else {
+                        var nurl = '/PURC/BILL/';
+                        jQuery('#mntbl').jqGrid('clearGridData');
+                        jQuery('#mntbl').jqGrid('setGridParam', { url: nurl, datatype: 'json', postData: { BNO: function () { return $("#txtBNO").val(); } } }).trigger("reloadGrid");
+                        $("#IGST").val(parseFloat($("#IGST").val()) + parseFloat($("#txtIGST").val()));
+                        $("#CGST").val(parseFloat($("#CGST").val()) + parseFloat($("#txtCGST").val()));
+                        $("#SGST").val(parseFloat($("#SGST").val()) + parseFloat($("#txtSGST").val()));
+                        $("#txtGTOT").val(parseFloat($("#txtGTOT").val()) + parseFloat($("#txtSTOT").val()));
+                        $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val()))).toFixed(2));
+                        var TVAL = parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val());
+                        var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat(TVAL));
+                        $('#txtROUND').val(rnd.toFixed(2));
+                        var mde = $('#txtMODE').val();
+                        if (mde == "CREDIT") {
+                            $('#txtNTOT').val($('#txtBAMT').val());
+                            $('#txtTOTAL').val(Math.round(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val())).toFixed(2));
+                            $('#txtBAPAY').val($('#txtBAMT').val());
+                            $('#txtBST').val("UP");
+                            $('#txtMODE').val(mde);
+                            $('#txtCBILL').val("0.00");
+                        }
+                        else {
+                            $('#txtCBILL').val($('#txtBAMT').val());
+                            $('#txtMODE').val(mde);
+                            $('#txtNTOT').val("0.00");
+                            $('#txtBAPAY').val("0.00");
+                            $('#txtBST').val("FP");
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("DPL","PURC")",
+                            data: { aData: $("#txtPTNAME").val() },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == "0") {
+                                $.ajax({
+                                    url: "@Url.Action("ADSTC", "PURC")",
+                                    type: "POST",
+                                data: dataObject1,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                    }
+                                },
+                                error: function OnErrorCall(response) {
+                                    alert(response.status + " " + response.statusText);
+                                }
+                            });
+                        }
+                    else {
+                                    $.ajax({
+                                        url: "@Url.Action("UPSTC", "PURC")",
+                            type: "POST",
+                        data: dataObject2,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.toString() != "Successfully Saved!") {
+                                alert(data.toString());
+                            }
+                        },
+                        error: function OnErrorCall(response) {
+                            alert(response.status + " " + response.statusText);
+                        }
+                    });
+                }
+            },
+            error: function OnErrorCall(response) {
+                alert(response.status + " " + response.statusText);
+            }
+            });
+                        $('.ADD_ITEM').find('input:text').val('');
+                        EMODE = true;
+            $("#popupWindow").dialog("close");
+            }
+            },
+            error: function OnErrorCall(response) {
+                alert(response.status + " " + response.statusText);
+            }
+            });
+            }
         </script>
     }
 

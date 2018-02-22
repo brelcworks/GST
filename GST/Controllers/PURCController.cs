@@ -204,5 +204,56 @@ namespace GST.Controllers
                 return View(TBL);
             }
         }
+
+        [Authorize]
+        public JsonResult dtls(int id)
+        {
+            List<BILL> STLIST = new List<BILL>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.BILL.Where(A => A.BILLID.Equals(id)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [Authorize]
+        public JsonResult sdtls(string id)
+        {
+            List<STC> STLIST = new List<STC>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.STC.Where(A => A.PARTI.Equals(id)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult UPD(BILL TBL)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    dc.Entry(TBL).State = EntityState.Modified;
+                    dc.SaveChanges();
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex) { message = ex.ToString(); }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(TBL);
+            }
+        }
     }
 }
