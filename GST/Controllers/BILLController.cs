@@ -273,10 +273,18 @@ namespace GST.Controllers
                         .Set("MRP", e.MRP)
                         .Set("QTY", e.SQTY)
                         .Set("TOTAL", e.TOTAL)
-                        .Set("TAX", e.TAX)
                         .Set("TVAL", e.TVAL)
                         .Set("UNIT", e.UNIT)
                         .Set("SPRICE", e.SPRICE)
+                        .Set("HSN_NO", e.HSN_NO)
+                        .Set("PARTI", e.PARTI)
+                        .Set("IGST", e.IGST)
+                        .Set("IGSTR", e.IGSTR)
+                        .Set("CGST", e.CGSTR)
+                        .Set("SGST", e.SGST)
+                        .Set("SGSTR", e.SGSTR)
+                        .Set("STOT", e.STOT)
+                        .Set("UNIT", e.UNIT)
                         .Set("USER1", e.USER1);
                     var result = collection.UpdateOne(filter, upd);
                     message = "Successfully Saved!";
@@ -294,7 +302,7 @@ namespace GST.Controllers
             else
             {
                 ViewBag.Message = message;
-                return View(TBL);
+                return View(e);
             }
         }
 
