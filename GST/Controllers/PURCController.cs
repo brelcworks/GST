@@ -255,5 +255,24 @@ namespace GST.Controllers
                 return View(TBL);
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult DELITEM_BILL(int id)
+        {
+            string message = "";
+            try
+            {
+                BILL tc = dc.BILL.Find(id);
+                dc.BILL.Remove(tc);
+                dc.SaveChanges();
+                message = "Successfully Saved!";
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+            return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
     }
 }

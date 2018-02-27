@@ -130,3 +130,13 @@ E:\xampp\htdocs\GST1\GST\bin\Newtonsoft.Json.xml
 E:\xampp\htdocs\GST1\GST\obj\Debug\GST.csprojResolveAssemblyReference.cache
 E:\xampp\htdocs\GST1\GST\obj\Debug\GST.dll
 E:\xampp\htdocs\GST1\GST\obj\Debug\GST.pdb
+E:\xampp\htdocs\GST1\GST\bin\DnsClient.dll
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Bson.dll
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Driver.Core.dll
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Driver.dll
+E:\xampp\htdocs\GST1\GST\bin\System.Buffers.dll
+E:\xampp\htdocs\GST1\GST\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\xampp\htdocs\GST1\GST\bin\DnsClient.xml
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Bson.xml
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Driver.xml
+E:\xampp\htdocs\GST1\GST\bin\MongoDB.Driver.Core.xml

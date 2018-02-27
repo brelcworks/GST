@@ -51,5 +51,6 @@ namespace GST.Models
         public string BST { get; set; }
         public string BID1 { get; set; }
         public Nullable<decimal> BAMT { get; set; }
+        public string STATECO { get; set; }
     }
 }

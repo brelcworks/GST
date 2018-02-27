@@ -225,7 +225,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding-top: 10px;" align="right" colspan="6"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" style="margin-right: 5px;" /></td>
+                    <td style="padding-top: 10px;" align="right" colspan="6"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" style="margin-right: 5px;" /><input id="del" type="button" value="Delete" style="margin-right: 5px;" /></td>
                 </tr>
             </table>
         </div>
@@ -324,6 +324,7 @@
                     });
  
                     $("#Cancel").jqxButton({ template: "warning" });
+                    $("#del").jqxButton({ template: "danger" });
                     $("#Save").jqxButton({ template: "success" });
                     $("#btnNBILL").jqxButton({ template: "primary" });                
                     $('#REFBILL').jqxButton({ template: "success" });
@@ -625,6 +626,85 @@
                             });
                             e.preventDefault();
                         }
+                });
+
+                $('#del').click(function (e) {
+                    $('#STQTY').val(parseFloat($('#qinc').val()) - parseFloat($('#txtQTY').val()))
+                    $('#STTOTAL').val((parseFloat($('#STQTY').val()) * parseFloat($('#txtMRP').val())).toFixed(2));
+                    var dataObject2 = {
+                        RID1: $("#STRID1").val(),
+                        HSN_NO: $("#txtPTNO").val(),
+                        PARTI: $("#txtPTNAME").val(),
+                        MRP: $("#txtMRP").val(),
+                        QTY: $("#STQTY").val(),
+                        SPRICE: $("#txtSPRICE").val(),
+                        TOTAL: $("#STTOTAL").val(),
+                        TAX: $('#txtTRATE').val(),
+                        UNIT: $("#txtUNIT").val(),
+                        RID: new Date($.now()),
+                        PPRICE: $('#txtSPRICE').val(),
+                        TVAL: $('#STTVAL').val(),
+                        USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
+                    };
+                    $.ajax({
+                        url: "@Url.Action("DELITEM_BILL", "PURC")",
+                        type: "POST",
+                        data: { "id": $('#BILLID-TXT').val() },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.toString() != "Successfully Saved!") {
+                                alert(data.toString());
+                            }
+                            else {
+                                var nurl = '/PURC/BILL/';
+                                jQuery('#mntbl').jqGrid('clearGridData');
+                                jQuery('#mntbl').jqGrid('setGridParam', { url: nurl, datatype: 'json', postData: { BNO: function () { return $("#txtBNO").val(); } } }).trigger("reloadGrid");
+                                $("#IGST").val(parseFloat($("#IGST").val()) - parseFloat($("#txtIGST").val()));
+                                $("#CGST").val(parseFloat($("#CGST").val()) - parseFloat($("#txtCGST").val()));
+                                $("#SGST").val(parseFloat($("#SGST").val()) - parseFloat($("#txtSGST").val()));
+                                $("#txtGTOT").val(parseFloat($("#txtGTOT").val()) - parseFloat($("#txtSTOT").val()));
+                                $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) - parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val()))).toFixed(2));
+                                var TVAL = parseFloat($('#IGST').val()) + parseFloat($('#CGST').val()) + parseFloat($('#SGST').val());
+                                var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat(TVAL));
+                                $('#txtROUND').val(rnd.toFixed(2));
+                                var mde = $('#txtMODE').val();
+                                if (mde == "CREDIT") {
+                                    $('#txtNTOT').val($('#txtBAMT').val());
+                                    $('#txtTOTAL').val(Math.round(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val())).toFixed(2));
+                                    $('#txtBAPAY').val($('#txtBAMT').val());
+                                    $('#txtBST').val("UP");
+                                    $('#txtMODE').val(mde);
+                                    $('#txtCBILL').val("0.00");
+                                }
+                                else {
+                                    $('#txtCBILL').val($('#txtBAMT').val());
+                                    $('#txtMODE').val(mde);
+                                    $('#txtNTOT').val("0.00");
+                                    $('#txtBAPAY').val("0.00");
+                                    $('#txtBST').val("FP");
+                                }
+                            }
+                    },
+                        error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.responseText);
+                    }
+                    });
+                    $.ajax({
+                        url: "@Url.Action("UPSTC", "PURC")",
+                        type: "POST",
+                    data: dataObject2,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.toString() != "Successfully Saved!") {
+                            alert(data.toString());
+                        }
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                    });
+                    $('.ADD_ITEM').find('input:text').val('');
+                    $("#popupWindow").dialog("close");
                 });
             });
 
