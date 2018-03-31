@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GST.Models;
 using System.Web.Security;
+using MongoDB.Driver;
 
 namespace GST.Controllers
 {
@@ -25,13 +26,17 @@ namespace GST.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult login(USER1 L, string ReturnUrl = "")
         {
-            using (DBCTX DC1 = new DBCTX())
-
+            try
             {
-                var user = DC1.USER1.Where(a => a.uid.Equals(L.uid) && a.pass.Equals(L.pass)).FirstOrDefault();
-                if (user != null)
+                var client = new MongoClient(System.Configuration.ConfigurationManager.AppSettings["mongo"]);
+                var database = client.GetDatabase("appharbor_gxm5g8zh");
+                var collection = database.GetCollection<USER>("USER");
+                var builder = Builders<USER>.Filter;
+                var filter = builder.Eq("uid", L.uid) & builder.Eq("pass", L.pass);
+                var result = collection.Find(filter).FirstOrDefault();
+                if (result != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.fname, false);
+                    FormsAuthentication.SetAuthCookie(result.fname, false);
                     if (Url.IsLocalUrl(ReturnUrl))
                     {
                         return Redirect(ReturnUrl);
@@ -41,6 +46,14 @@ namespace GST.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
+                else
+                {
+                    ViewBag.ERR = "Wrong User ID or Password! Please Try Again";
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.ERR = e.ToString();
             }
             return View();
         }
@@ -64,6 +77,16 @@ namespace GST.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("login", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Register(USER um)
+        {
+            var client = new MongoClient(System.Configuration.ConfigurationManager.AppSettings["mongo"]);
+            var database = client.GetDatabase("appharbor_gxm5g8zh");
+            var collection = database.GetCollection<USER>("USER");
+            collection.InsertOne(um);
+            return RedirectToAction("login");
         }
     }
 }

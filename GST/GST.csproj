@@ -163,9 +163,11 @@
     <Compile Include="Models\BILL1.cs" />
     <Compile Include="Models\DBCTX.cs" />
     <Compile Include="Models\BILL.cs" />
+    <Compile Include="Models\PUCHM.cs" />
     <Compile Include="Models\PUCH.cs" />
     <Compile Include="Models\STCM.cs" />
     <Compile Include="Models\STC.cs" />
+    <Compile Include="Models\USER.cs" />
     <Compile Include="Models\USER1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1062,6 +1064,7 @@
     <Content Include="jqwidgets\styles\images\Thumbs.db" />
     <Content Include="jqwidgets\styles\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CONF.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\i18n\grid.locale-bg.js" />
     <Content Include="Scripts\i18n\grid.locale-bg1251.js" />

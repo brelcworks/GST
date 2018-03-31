@@ -51,7 +51,7 @@ namespace GST.Controllers
                     a.PARTI,
                     a.MRP,
                     a.SPRICE,
-                    a.PQTY,
+                    a.SQTY,
                     a.UNIT,
                     a.TVAL,
                     a.STOT
@@ -67,6 +67,44 @@ namespace GST.Controllers
             else
             {
                 dbResult = dbResult.OrderBy(s => s.PARTI);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            var JsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = dbResult
+            };
+            return Json(JsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BILL1(int page, int rows, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            var database = client.GetDatabase("appharbor_gxm5g8zh");
+            var collection = database.GetCollection<PUCHM>("BILL1");
+            var dbResult = collection.AsQueryable<PUCHM>().Select(
+                a => new
+                {
+                    a.BID,
+                    a.BNO,
+                    a.BDATE,
+                    a.CUST,
+                    a.BAMT
+                });
+
+            int totalRecords = dbResult.Count();
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            if (sord.ToUpper() == "DESC")
+            {
+                dbResult = dbResult.OrderByDescending(s => s.BID);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            else
+            {
+                dbResult = dbResult.OrderBy(s => s.BID);
                 dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
             }
             var JsonData = new
@@ -271,7 +309,7 @@ namespace GST.Controllers
                     var filter = builder.Eq(s => s.BILLID, e.BILLID);
                     var upd = Builders<BILLM>.Update
                         .Set("MRP", e.MRP)
-                        .Set("QTY", e.SQTY)
+                        .Set("SQTY", e.SQTY)
                         .Set("TOTAL", e.TOTAL)
                         .Set("TVAL", e.TVAL)
                         .Set("UNIT", e.UNIT)
@@ -313,9 +351,11 @@ namespace GST.Controllers
             string message = "";
             try
             {
-                BILL tc = dc.BILL.Find(id);
-                dc.BILL.Remove(tc);
-                dc.SaveChanges();
+                var database = client.GetDatabase("appharbor_gxm5g8zh");
+                var collection = database.GetCollection<BILLM>("BILL");
+                var builder = Builders<BILLM>.Filter;
+                var filter = builder.Eq(s => s.BILLID, id);
+                var result = collection.DeleteOne(filter);
                 message = "Successfully Saved!";
             }
             catch (Exception ex)
@@ -323,6 +363,37 @@ namespace GST.Controllers
                 message = ex.ToString();
             }
             return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ADDBILL(PUCHM bill)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var database = client.GetDatabase("appharbor_gxm5g8zh");
+                    var collection = database.GetCollection<PUCHM>("BILL1");
+                    collection.InsertOne(bill);
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex) { message = ex.ToString(); }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(bill);
+            }
         }
     }
 }

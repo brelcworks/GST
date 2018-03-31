@@ -36,7 +36,10 @@
                         <div id="mnpgr"></div>
                     </div>
                 </td>
-                <td width="40%"></td>
+                <td width="40%">
+                    <table id="mntbl1"></table>
+                    <div id="mnpgr1"></div>
+                </td>
             </tr>
         </table>
         <table class="table table-hover table-bordered table-responsive ui-front" style="font-size:x-small;">
@@ -345,7 +348,7 @@
                             { key: false, name: 'PARTI', index: 'PARTI', editable: true, width: '40%' },
                             { key: false, hidden: true, name: 'MRP', index: 'MRP', editable: true },
                             { key: false, name: 'SPRICE', index: 'SPRICE', editable: true, width: '10%' },
-                            { key: false, name: 'PQTY', index: 'PQTY', editable: true, width: '5%' },
+                            { key: false, name: 'SQTY', index: 'SQTY', editable: true, width: '5%' },
                             { key: false, name: 'UNIT', index: 'UNIT', editable: true, width: '5%' },
                             { key: false, name: 'TVAL', index: 'TVAL', editable: true, width: '10%' },
                             { key: false, name: 'STOT', index: 'STOT', editable: true, width: '10%' },
@@ -410,6 +413,77 @@
                     });
 
                     $("#mntbl_toppager table.navtable tbody tr").append($("#pg1"));
+
+                    $('#mntbl1').jqGrid({
+                        url: '/BILL/BILL1/',
+                        datatype: 'json',
+                        mtype: 'GET',
+                        colNames: ['BID', 'BILL NO', 'DATE', 'CUSTOMER', 'AMOUNT' , 'ACTION'],
+                        colModel: [
+                            { key: true, hidden: true, name: 'BID', index: 'BID', editable: true, editrules: { edithidden: true } },
+                            { key: false, name: 'BNO', index: 'BNO', editable: true, width: '10%' },
+                            { key: false, name: 'BDATE', index: 'BDATE', editable: true, width: '20%' },
+                            { key: false, name: 'CUST', index: 'CUST', editable: true, width: '50%' },
+                            { key: false, name: 'BAMT', index: 'BAMT', editable: true, width: '10%' },
+                            { name: 'act', index: 'act', sortable: false, width: '10%', allign: 'right' }
+                        ],
+                        toppager: true,
+                        pager: jQuery('#mnpgr1'),
+                        height: 285,
+                        width: 540,
+                        rowNum: 100000000,
+                        rowList: [],
+                        pgbuttons: false,
+                        pgtext: null,
+                        loadComplete: function () {
+                            $("option[value=100000000]").text('All');
+                            var grid = jQuery("#mntbl1");
+                            var ids = grid.jqGrid("getDataIDs");
+                            grid.jqGrid("setSelection", ids[0]);
+                        },
+                        footerrow: true,
+                        gridComplete: function () {
+                            $('#mntbl1_toppager_center').empty();
+                            var ids = jQuery("#mntbl1").getDataIDs();
+                            for (var i = 0; i < ids.length; i++) {
+                                var cl = ids[i];
+                                be = "<button onclick=gtmntblid(" + cl + ")><span class='ui-button-icon ui-icon ui-icon-pencil'></span></button>";
+                                jQuery("#mntbl1").setRowData(ids[i], { act: be })
+                            }
+                            var $grid = $('#mntbl1');
+                            var colSum = $grid.jqGrid('getCol', 'BAMT', false, 'sum');
+                            $grid.jqGrid('footerData', 'set', { 'BAMT': colSum });
+                        },
+                        emptyrecords: 'BLANK',
+                        loadonce: true,
+                        shrinkToFit: true,
+                        viewrecords: true,
+                        caption: "SALES BILLS",
+                        scrollrows: true,
+                        jsonReader: {
+                            root: 'rows',
+                            page: 'page',
+                            total: 'total',
+                            records: 'records',
+                            repeatitems: false,
+                            id: '0'
+                        }
+                    }).navGrid('#mnpgr1', { edit: false, add: false, del: false, refresh: true, search: true, view: true, cloneToTop: true }).jqGrid('navButtonAdd', '#mnpgr1', {
+                        caption: "", buttonicon: "ui-icon-calculator", title: "choose columns",
+                        onClickButton: function () {
+                            $('#mntbl1').jqGrid('columnChooser', {
+                                width: 550,
+                                dialog_opts: {
+                                    modal: true,
+                                    minWidth: 470,
+                                    height: 470,
+                                    show: 'blind',
+                                    hide: 'explode',
+                                    dividerLocation: 0.5
+                                }
+                            });
+                        }
+                    });
 
                     $("#popupWindow").dialog({
                         modal: true,
@@ -498,7 +572,6 @@
                         success: function (data) {
                             var gtbno = parseFloat(data) + 1;
                             $('#BILLID-TXT').val(gtbno);
-                            alert($('#BILLID-TXT').val());
                         },
                         error: function OnErrorCall(response) {
                             alert(response.status + " " + response.responseText);
@@ -531,6 +604,11 @@
                         ADDEMODE()
                     }
                 });
+
+                $('#btnNBILL').click(function (e) {
+                   ADDBILL()
+                });
+
                 $('#txtBNO').keypress(function (e) {
                     if (e.keyCode == 13) {
                         $('#txtCUST').focus();
@@ -659,7 +737,7 @@
                         USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
                     };
                     $.ajax({
-                        url: "@Url.Action("DELITEM_BILL", "PURC")",
+                        url: "@Url.Action("DELITEM_BILL", "BILL")",
                         type: "POST",
                         data: { "id": $('#BILLID-TXT').val() },
                         dataType: "json",
@@ -668,7 +746,7 @@
                                 alert(data.toString());
                             }
                             else {
-                                var nurl = '/PURC/BILL/';
+                                var nurl = '/BILL/BILL/';
                                 jQuery('#mntbl').jqGrid('clearGridData');
                                 jQuery('#mntbl').jqGrid('setGridParam', { url: nurl, datatype: 'json', postData: { BNO: function () { return $("#txtBNO").val(); } } }).trigger("reloadGrid");
                                 $("#IGST").val(parseFloat($("#IGST").val()) - parseFloat($("#txtIGST").val()));
@@ -702,7 +780,7 @@
                     }
                     });
                     $.ajax({
-                        url: "@Url.Action("UPSTC", "PURC")",
+                        url: "@Url.Action("UPSTC", "BILL")",
                         type: "POST",
                     data: dataObject2,
                     dataType: "json",
@@ -732,7 +810,7 @@
                         $("#txtPTNO").val(val.HSN_NO)
                         $("#txtPTNAME").val(val.PARTI)
                         $("#txtMRP").val(val.MRP)
-                        $('#txtQTY').val(val.PQTY)
+                        $('#txtQTY').val(val.SQTY)
                         $('#txtBNO1').val($('#txtBNO').val())
                         $('#txtSPRICE').val(val.SPRICE)
                         $('#txtTVAL1').val(val.TVAL)
@@ -743,7 +821,7 @@
                         $('#txtSTOT').val(val.STOT)
                         $('#BILLID-TXT').val(val.BILLID)
                         $('#BID-TXT').val(val.BID)
-                        $('#OSTC').val(val.PQTY)
+                        $('#OSTC').val(val.SQTY)
                         $("#txtIGST").val(val.IGST)
                         $("#txtCGST").val(val.CGST)
                         $("#txtSGST").val(val.SGST)
@@ -784,7 +862,7 @@
                     HSN_NO: $("#txtPTNO").val(),
                     PARTI: $("#txtPTNAME").val(),
                     MRP: $("#txtMRP").val(),
-                    PQTY: $("#txtQTY").val(),
+                    SQTY: $("#txtQTY").val(),
                     SPRICE: $("#txtSPRICE").val(),
                     TOTAL: $("#txtTOT").val(),
                     IGST: $("#txtIGST").val(),
@@ -875,7 +953,6 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            alert(data);
                             if (data == "0") {
                                 $.ajax({
                                     url: "@Url.Action("ADSTC", "BILL")",
@@ -913,7 +990,8 @@
                 alert(response.status + " " + response.statusText);
             }
             });
-            $('.ADD_ITEM').find('input:text').val('');
+                        $('.ADD_ITEM').find('input:text').val('');
+                        System.Configuration.ConfigurationManager.AppSettings["RCON"].value= 1
             $("#popupWindow").dialog("close");
             }
             },
@@ -930,7 +1008,7 @@
                     HSN_NO: $("#txtPTNO").val(),
                     PARTI: $("#txtPTNAME").val(),
                     MRP: $("#txtMRP").val(),
-                    PQTY: $("#txtQTY").val(),
+                    SQTY: $("#txtQTY").val(),
                     SPRICE: $("#txtSPRICE").val(),
                     TOTAL: $("#txtTOT").val(),
                     IGST: $("#txtIGST").val(),
@@ -978,7 +1056,7 @@
                     USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
                 };
                 $.ajax({
-                    url: "@Url.Action("UPD","PURC")",
+                    url: "@Url.Action("UPD","BILL")",
                     type: "POST",
                 data: dataObject,
                 dataType: "json",
@@ -1068,6 +1146,45 @@
             }
             });
             }
+
+        function ADDBILL() {
+            var dataObject = {
+                BNO: $("#txtBNO").val(),
+                BDATE: $("#txtBDATE").val(),
+                CUST: $("#txtCUST").val(),
+                GTOT: $('#txtGTOT').val(),
+                NTOT: $('#txtNTOT').val(),
+                VNO: $('#txtVNO').val(),
+                ROUND: $('#txtROUND').val(),
+                ADDRESS: $('#txtADDRESS').val(),
+                MODE: $('#txtMODE').val(),
+                IGST: $('#IGST').val(),
+                CGST: $('#CGST').val(),
+                SGST: $('#SGST').val(),
+                PAYMENT: $('#txtPAYMENT').val(),
+                USER1: $('#txtUSER1').val(),
+                CBILL: $('#txtCBILL').val(),
+                BAPAY: $('#txtBAPAY').val(),
+                BST: $('#txtBST').val(),
+                BID1: $('#txtBID1').val(),
+                TOTAL: $('#txtTOTAL').val(),
+                BAMT: $('#txtBAMT').val()
+            }
+            $.ajax({
+                url: "@Url.Action("ADDBILL", "BILL")",
+                type: "POST",
+                data: dataObject,
+                dataType: "json",
+                success: function (data) {
+                    if (data.toString() != "Successfully Saved!") {
+                    alert(data.toString());
+                    }
+                },
+                error: function OnErrorCall(response) {
+                    alert(response.status + " " + response.statusText);
+                }
+            });
+        }
     </script>
 }
 
