@@ -7,6 +7,8 @@ using GST.Models;
 using System.Web.Security;
 using System.Data.Entity;
 using MongoDB.Driver;
+using System.Configuration;
+using System.Web.Configuration;
 
 namespace GST.Controllers
 {
@@ -394,6 +396,25 @@ namespace GST.Controllers
                 ViewBag.Message = message;
                 return View(bill);
             }
+        }
+
+        public JsonResult RCON()
+        {
+            string message = "";
+            try
+            {
+                Configuration webConfigApp = WebConfigurationManager.OpenWebConfiguration("~");
+                int rc =Convert.ToInt32(webConfigApp.AppSettings.Settings["RCON"].Value.ToString());
+                int CR = rc + 1;
+                webConfigApp.AppSettings.Settings["RCON"].Value = Convert.ToString(CR);
+                webConfigApp.Save();
+                message = Convert.ToString(CR);
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+            return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

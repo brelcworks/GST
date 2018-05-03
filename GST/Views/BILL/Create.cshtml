@@ -385,7 +385,7 @@
                         loadonce: true,
                         shrinkToFit: true,
                         viewrecords: true,
-                        caption: "PURCHASE ITEMS DETAILS",
+                        caption: "SALES ITEMS DETAILS",
                         scrollrows: true,
                             jsonReader: {
                         root: 'rows',
@@ -422,7 +422,7 @@
                         colModel: [
                             { key: true, hidden: true, name: 'BID', index: 'BID', editable: true, editrules: { edithidden: true } },
                             { key: false, name: 'BNO', index: 'BNO', editable: true, width: '10%' },
-                            { key: false, name: 'BDATE', index: 'BDATE', editable: true, width: '20%' },
+                            { key: false, name: 'BDATE', index: 'BDATE', editable: true, width: '20%', formatter: 'date', formatoptions: { srcformat: 'd/m/Y', newformat: 'd-m-Y' } },
                             { key: false, name: 'CUST', index: 'CUST', editable: true, width: '50%' },
                             { key: false, name: 'BAMT', index: 'BAMT', editable: true, width: '10%' },
                             { name: 'act', index: 'act', sortable: false, width: '10%', allign: 'right' }
@@ -447,7 +447,7 @@
                             var ids = jQuery("#mntbl1").getDataIDs();
                             for (var i = 0; i < ids.length; i++) {
                                 var cl = ids[i];
-                                be = "<button onclick=gtmntblid(" + cl + ")><span class='ui-button-icon ui-icon ui-icon-pencil'></span></button>";
+                                be = "<button onclick=gtmntblid1(" + cl + ")><span class='ui-button-icon ui-icon ui-icon-pencil'></span></button>";
                                 jQuery("#mntbl1").setRowData(ids[i], { act: be })
                             }
                             var $grid = $('#mntbl1');
@@ -564,18 +564,19 @@
                     else {
                         $("#popupWindow").dialog("open");
                         $("#txtBNO1").val($("#txtBNO").val());
+                        RCON()
                         $.ajax({
                             type: "GET",
                             url: "@Url.Action("CON1", "BILL")",
                             contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            var gtbno = parseFloat(data) + 1;
-                            $('#BILLID-TXT').val(gtbno);
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.responseText);
-                        }
+                            dataType: "json",
+                            success: function (data) {
+                                var gtbno = parseFloat(data) + 1;
+                                $('#BILLID-TXT').val(gtbno);
+                            },
+                            error: function OnErrorCall(response) {
+                                alert(response.status + " " + response.responseText);
+                            }
                     });
                         $('#txtPTNAME').focus();
                     }
@@ -803,9 +804,9 @@
                     type: "GET",
                     url: "@Url.Action("dtls", "BILL")",
                     data: { id: id },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
                     $.each(data, function (i, val) {
                         $("#txtPTNO").val(val.HSN_NO)
                         $("#txtPTNAME").val(val.PARTI)
@@ -857,7 +858,7 @@
 
         function ADDNMODE() {
             var dataObject = {
-                    BILLID: $('#BILLID-TXT').val(),
+                BILLID: '@(System.Configuration.ConfigurationManager.AppSettings["RCON"].ToString())',
                     BILL_NO: $("#txtBNO1").val(),
                     HSN_NO: $("#txtPTNO").val(),
                     PARTI: $("#txtPTNAME").val(),
@@ -889,7 +890,7 @@
                     TOTAL: $("#txtTOT").val(),
                     TAX:$('#txtTRATE').val(),
                     UNIT: $("#txtUNIT").val(),
-                    RID: new Date($.now()),
+                    RID: '@(System.Configuration.ConfigurationManager.AppSettings["RCON"].ToString())',
                     PPRICE: $('#txtSPRICE').val(),
                     TVAL: $('#txtTVAL1').val(),
                     USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
@@ -991,7 +992,7 @@
             }
             });
                         $('.ADD_ITEM').find('input:text').val('');
-                        System.Configuration.ConfigurationManager.AppSettings["RCON"].value= 1
+
             $("#popupWindow").dialog("close");
             }
             },
@@ -1035,7 +1036,7 @@
                     TOTAL: $("#txtTOT").val(),
                     TAX:$('#txtTRATE').val(),
                     UNIT: $("#txtUNIT").val(),
-                    RID: new Date($.now()),
+                    RID: '@(System.Configuration.ConfigurationManager.AppSettings["RCON"].ToString())',
                     PPRICE: $('#txtSPRICE').val(),
                     TVAL: $('#txtTVAL1').val(),
                     USER1: '@HttpContext.Current.User.Identity.Name.ToString()'
@@ -1096,42 +1097,42 @@
                             type: "GET",
                             url: "@Url.Action("DPL","BILL")",
                             data: { aData: $("#txtPTNAME").val() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            if (data == "0") {
-                                $.ajax({
-                                    url: "@Url.Action("ADSTC", "BILL")",
-                                    type: "POST",
-                                data: dataObject1,
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data.toString() != "Successfully Saved!") {
-                                        alert(data.toString());
-                                    }
-                                },
-                                error: function OnErrorCall(response) {
-                                    alert(response.status + " " + response.statusText);
-                                }
-                            });
-                        }
-                    else {
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data == "0") {
                                     $.ajax({
+                                        url: "@Url.Action("ADSTC", "BILL")",
+                                        type: "POST",
+                                        data: dataObject1,
+                                        dataType: "json",
+                                        success: function (data) {
+                                            if (data.toString() != "Successfully Saved!") {
+                                            alert(data.toString());
+                                            }
+                                        },
+                                        error: function OnErrorCall(response) {
+                                            alert(response.status + " " + response.statusText);
+                                        }
+                                });
+                            }
+                            else {
+                                $.ajax({
                                         url: "@Url.Action("UPSTC", "BILL")",
-                            type: "POST",
-                        data: dataObject2,
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.toString() != "Successfully Saved!") {
-                                alert(data.toString());
+                                        type: "POST",
+                                        data: dataObject2,
+                                        dataType: "json",
+                                        success: function (data) {
+                                            if (data.toString() != "Successfully Saved!") {
+                                                alert(data.toString());
+                                            }
+                                        },
+                                        error: function OnErrorCall(response) {
+                                            alert(response.status + " " + response.statusText);
+                                                }
+                                });
                             }
                         },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
-                    });
-                }
-            },
             error: function OnErrorCall(response) {
                 alert(response.status + " " + response.statusText);
             }
@@ -1166,7 +1167,8 @@
                 CBILL: $('#txtCBILL').val(),
                 BAPAY: $('#txtBAPAY').val(),
                 BST: $('#txtBST').val(),
-                BID1: $('#txtBID1').val(),
+                BID1: '@(System.Configuration.ConfigurationManager.AppSettings["RCON"].ToString())',
+                BID: '@(System.Configuration.ConfigurationManager.AppSettings["RCON"].ToString())',
                 TOTAL: $('#txtTOTAL').val(),
                 BAMT: $('#txtBAMT').val()
             }
@@ -1185,6 +1187,25 @@
                 }
             });
         }
+
+        function RCON() {
+            $.ajax({
+                url: "@Url.Action("RCON", "BILL")",
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+            },
+            error: function OnErrorCall(response) {
+                alert(response.status + " " + response.statusText);
+            }
+        });
+        }
+        function parseJsonDate(jsonDateString) {
+            return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+        }
+        jQuery(window).bind('beforeunload', function () {
+                return 'Please Save the Bill Before Exit this Page!';
+        });
     </script>
 }
 
