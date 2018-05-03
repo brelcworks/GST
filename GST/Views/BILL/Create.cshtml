@@ -565,21 +565,9 @@
                         $("#popupWindow").dialog("open");
                         $("#txtBNO1").val($("#txtBNO").val());
                         RCON()
-                        $.ajax({
-                            type: "GET",
-                            url: "@Url.Action("CON1", "BILL")",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-                                var gtbno = parseFloat(data) + 1;
-                                $('#BILLID-TXT').val(gtbno);
-                            },
-                            error: function OnErrorCall(response) {
-                                alert(response.status + " " + response.responseText);
-                            }
-                    });
                         $('#txtPTNAME').focus();
                     }
+                    e.preventDefault();
                 });
 
                 $('#searchField').keypress(function (e) {
@@ -604,6 +592,7 @@
                     {
                         ADDEMODE()
                     }
+                    e.preventDefault();
                 });
 
                 $('#btnNBILL').click(function (e) {
@@ -913,12 +902,12 @@
                 $.ajax({
                     url: "@Url.Action("Save","BILL")",
                     type: "POST",
-                data: dataObject,
-                dataType: "json",
-                success: function (data) {
-                    if (data.toString() != "Successfully Saved!") {
-                        alert(data.toString());
-                    }
+                    data: dataObject,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.toString() != "Successfully Saved!") {
+                            alert(data.toString());
+                            }
                     else {
                         var nurl = '/BILL/BILL/';
                         jQuery('#mntbl').jqGrid('clearGridData');
@@ -951,48 +940,50 @@
                             type: "GET",
                             url: "@Url.Action("DPL","BILL")",
                             data: { aData: $("#txtPTNAME").val() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
                             if (data == "0") {
                                 $.ajax({
                                     url: "@Url.Action("ADSTC", "BILL")",
                                     type: "POST",
-                                data: dataObject1,
-                                dataType: "json",
-                                success: function (data) {
+                                    data: dataObject1,
+                                    dataType: "json",
+                                    success: function (data) {
                                     if (data.toString() != "Successfully Saved!") {
                                         alert(data.toString());
                                     }
-                                },
-                                error: function OnErrorCall(response) {
-                                    alert(response.status + " " + response.statusText);
-                                }
-                            });
-                        }
-                    else {
-                                    $.ajax({
-                                        url: "@Url.Action("UPSTC", "BILL")",
-                            type: "POST",
-                        data: dataObject2,
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.toString() != "Successfully Saved!") {
-                                alert(data.toString());
+                                    else {
+                                        RCON()
+                                    }
+                                    },
+                                    error: function OnErrorCall(response) {
+                                        alert(response.status + " " + response.statusText);
+                                    }
+                                });
                             }
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
-                    });
+                            else {
+                                 $.ajax({
+                                    url: "@Url.Action("UPSTC", "BILL")",
+                                    type: "POST",
+                                    data: dataObject2,
+                                    dataType: "json",
+                                    success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                        }
+                                    },
+                                     error: function OnErrorCall(response) {
+                                        alert(response.status + " " + response.statusText);
+                                    }
+                            });
                 }
             },
             error: function OnErrorCall(response) {
                 alert(response.status + " " + response.statusText);
             }
             });
-                        $('.ADD_ITEM').find('input:text').val('');
-
+                       CLS()
             $("#popupWindow").dialog("close");
             }
             },
@@ -1110,6 +1101,9 @@
                                             if (data.toString() != "Successfully Saved!") {
                                             alert(data.toString());
                                             }
+                                            else {
+                                                RCON()
+                                            }
                                         },
                                         error: function OnErrorCall(response) {
                                             alert(response.status + " " + response.statusText);
@@ -1204,8 +1198,30 @@
             return new Date(parseInt(jsonDateString.replace('/Date(', '')));
         }
         jQuery(window).bind('beforeunload', function () {
-                return 'Please Save the Bill Before Exit this Page!';
+                return false;
         });
+        function CLS(){
+            $("#txtPTNO").val("")
+            $("#txtPTNAME").val("")
+            $("#txtMRP").val("")
+            $('#txtQTY').val("")
+            $('#txtBNO1').val("")
+            $('#txtSPRICE').val("")
+            $('#txtTVAL1').val("")
+            $('#txtTRATE').val("")
+            $('#txtTOT').val("")
+            $('#txtTOT2').val("")
+            $('#txtUNIT').val("")
+            $('#txtSTOT').val("")
+            $('#BILLID-TXT').val("")
+            $('#BID-TXT').val("")
+            $('#OSTC').val("")
+            $("#txtIGST").val("")
+            $("#txtCGST").val("")
+            $("#txtSGST").val("")
+            $("#txtCGSTR").val("")
+            $("#txtSGSTR").val("")
+        }
     </script>
 }
 
